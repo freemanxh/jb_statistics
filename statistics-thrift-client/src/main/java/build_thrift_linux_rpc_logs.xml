@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<project name="testthrift-rpc" default="thrift-gen">
+	<property name="basedir" value="." />
+	<property name="thrift.dir" value="${basedir}/com/jb/statistics/rpc/thrift" />
+	<!-- Generate thrift java -->
+	<target name="thrift-gen">
+		<echo message="Running thrift generator " />
+		<apply executable="thrift" dir="${basedir}" parallel="false">
+			<fileset dir="${thrift.dir}" includes="logs.thrift" />
+			<arg line="--gen java:beans -o ." />
+			<srcfile />
+		</apply>
+	</target>
+</project>
