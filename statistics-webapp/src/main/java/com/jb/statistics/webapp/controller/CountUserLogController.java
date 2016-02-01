@@ -30,35 +30,20 @@ import com.jb.statistics.webapp.view.entities.ProjectEntity;
 public class CountUserLogController {
 
 	@Autowired
-	private CountClickService countClickService;
+	protected CountClickService countClickService;
 
 	@Autowired
-	private CountClickFunctionsService countClickFunctionsService;
+	protected CountClickFunctionsService countClickFunctionsService;
 
 	@Autowired
-	private CountNewUserService countNewUserService;
+	protected CountNewUserService countNewUserService;
 
 	@Autowired
 	private ProjectService projectService;
-	
+
 	@RequestMapping(value = "/click.do")
 	public String click(HttpServletRequest request, HttpServletResponse response, Model model, CountForm form) {
-		if (StringUtils.isBlank(form.getStartDate()) || StringUtils.isBlank(form.getEndDate()) || StringUtils.isBlank(form.getProjectId())) {
-			Calendar c = Calendar.getInstance();
-			c.add(Calendar.DAY_OF_YEAR, -1);
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-			String startDate = df.format(new Date(c.getTimeInMillis()));
-			c.add(Calendar.DAY_OF_YEAR, 1);
-			String endDate = df.format(new Date(c.getTimeInMillis()));
-			form.setStartDate(startDate);
-			form.setEndDate(endDate);
-		}
-
-		// } else {
-
-		if ("0".equals(form.getProjectId())) {
-			form.setProjectId(null);
-		}
+		validateParams(form);
 
 		ClickView v = this.countClickService.buildClickView(form.getStartDate(), form.getEndDate(), form.getProjectId());
 		model.addAttribute("view", v);
@@ -68,10 +53,8 @@ public class CountUserLogController {
 		return "admin/click/index";
 	}
 
-	@RequestMapping(value = "/clickFunctions.do")
-	public String clickFunctions(HttpServletRequest request, HttpServletResponse response, Model model, CountForm form) {
-		
-		if (StringUtils.isBlank(form.getStartDate()) || StringUtils.isBlank(form.getEndDate()) || StringUtils.isBlank(form.getProjectId())) {
+	protected void validateParams(CountForm form) {
+		if (StringUtils.isBlank(form.getStartDate()) || StringUtils.isBlank(form.getEndDate())) {
 			Calendar c = Calendar.getInstance();
 			c.add(Calendar.DAY_OF_YEAR, -1);
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -81,10 +64,17 @@ public class CountUserLogController {
 			form.setStartDate(startDate);
 			form.setEndDate(endDate);
 		}
-		
+
 		if ("0".equals(form.getProjectId())) {
 			form.setProjectId(null);
 		}
+	}
+
+	@RequestMapping(value = "/clickFunctions.do")
+	public String clickFunctions(HttpServletRequest request, HttpServletResponse response, Model model, CountForm form) {
+
+		validateParams(form);
+
 		ClickFunctionsView v = this.countClickFunctionsService.buildClickFuncitonsView(form.getStartDate(), form.getEndDate(), form.getProjectId());
 		model.addAttribute("view", v);
 		this.setModel(form, model);
@@ -96,21 +86,9 @@ public class CountUserLogController {
 
 	@RequestMapping(value = "/newUsers.do")
 	public String newUser(HttpServletRequest request, HttpServletResponse response, Model model, CountForm form) {
-		
-		if (StringUtils.isBlank(form.getStartDate()) || StringUtils.isBlank(form.getEndDate()) || StringUtils.isBlank(form.getProjectId())) {
-			Calendar c = Calendar.getInstance();
-			c.add(Calendar.DAY_OF_YEAR, -1);
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-			String startDate = df.format(new Date(c.getTimeInMillis()));
-			c.add(Calendar.DAY_OF_YEAR, 1);
-			String endDate = df.format(new Date(c.getTimeInMillis()));
-			form.setStartDate(startDate);
-			form.setEndDate(endDate);
-		}
-		
-		if ("0".equals(form.getProjectId())) {
-			form.setProjectId(null);
-		}
+
+		validateParams(form);
+
 		NewUserView v = this.countNewUserService.buildNewUserView(form.getStartDate(), form.getEndDate(), form.getProjectId());
 		model.addAttribute("view", v);
 		this.setModel(form, model);

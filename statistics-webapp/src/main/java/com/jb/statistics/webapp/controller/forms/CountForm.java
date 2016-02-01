@@ -1,15 +1,22 @@
 package com.jb.statistics.webapp.controller.forms;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-
 public class CountForm {
-//	@NotBlank
+	// @NotBlank
 	private String startDate;
-//	@NotBlank
+	// @NotBlank
 	private String endDate;
-//	@NotBlank
+	// @NotBlank
 	private String projectId;
+
+	private String pid;
+
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
 
 	public String getStartDate() {
 		return startDate;
@@ -28,7 +35,7 @@ public class CountForm {
 	}
 
 	public String getProjectId() {
-		return projectId;
+		return projectId == null ? "0".equals(pid) ? null : pid : projectId;
 	}
 
 	public void setProjectId(String projectId) {

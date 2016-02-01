@@ -14,7 +14,6 @@ import com.jb.statistics.dao.impl.BaseDaoJdbcLogsImpl;
 import com.jb.statistics.dao.logs.statis.entities.ClickBean;
 import com.jb.statistics.dao.logs.statis.entities.ClickFunctionBean;
 import com.jb.statistics.dao.logs.statis.entities.ProjectBean;
-import com.jb.statistics.dao.logs.statis.entities.UserCountBean;
 
 @Repository("countLogs")
 public class CountLogsImpl extends BaseDaoJdbcLogsImpl implements CountLogs {
