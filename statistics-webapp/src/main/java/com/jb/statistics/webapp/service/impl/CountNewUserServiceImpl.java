@@ -59,7 +59,7 @@ public class CountNewUserServiceImpl extends BaseServiceImpl implements CountNew
 		ucb.setNewUsers(sumNew);
 		ucb.setSumUser(sumAll);
 		ucb.setProjectName("总计");
-		list.add(ucb);
+//		list.add(ucb);
 
 		NewUserView nuv = new NewUserView();
 		UserCountEntity allUserCountEntity = new UserCountEntity();
