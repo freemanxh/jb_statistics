@@ -1,0 +1,14 @@
+/* here you can put your own css to customize and override the theme */
+
+#donut.chart {
+    height: 500px!important;
+}
+
+#dashboard-report-range.btn {
+    padding: 6px 10px 7px;
+}
+
+
+#site_statistics_table .row {
+    margin: 0;
+}
