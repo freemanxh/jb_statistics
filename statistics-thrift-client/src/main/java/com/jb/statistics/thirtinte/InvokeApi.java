@@ -35,7 +35,7 @@ public class InvokeApi {
 
 	public static void main(String[] args) {
 		InvokeApi b = new InvokeApi();
-		System.out.println(b.getMobileAndProjectId("314092257"));
+		System.out.println(b.getMobileAndProjectId("8124844"));
 	}
 
 	private static String post(String subUrl, String userId) {
@@ -56,6 +56,8 @@ public class InvokeApi {
 			conn.setInstanceFollowRedirects(true);
 
 			conn.setRequestProperty("Content-Type", "application/json");
+			
+			System.out.println("111111111111111111111111111111111111111111111111111111111111");
 
 			// 发送POST请求必须设置如下两行
 			conn.setDoOutput(true);
@@ -64,6 +66,8 @@ public class InvokeApi {
 			out = new OutputStreamWriter(conn.getOutputStream());
 			// 发送请求参数
 			out.write("{\"contactId\":\"" + userId + "\"}");
+			
+			System.out.println("222222222222222222222222222222222222222222222222222222222222222");
 			// out.write("{\"token\":\"RERFSWdRQWdsckNLUDBIOHdFSzF3NThoUi9iNk05cnRqZ242cVRzMlJ2akZVRlNiQ2Y4Tm42U2tK%0AVmpHandySVZUZTJPcGxFMlY1YwpPNUdNTEwzL3JYQi9NckhVN1VtaUlmTDA2WUc3cVpnPT9hcHBJ%0AZD0xJmtleUlkPTE%3D\"}");
 			// result:{"token":"RERFSWdRQWdsckNLUDBIOHdFSzF3NjZId0NrN2dYdUNha1ZXME4vTVVGL0ZVRlNiQ2Y4Tm53VHNO%0ATk9BRFp1MWF6am9tSFJXcWtkYwpPNUdNTEwzL3JYQi9NckhVN1VtaVZ3NjB0SzUreDVVPT9hcHBJ%0AZD0xJmtleUlkPTE%3D","code":null,"msg":null}
 
@@ -75,6 +79,8 @@ public class InvokeApi {
 			// flush输出流的缓冲
 			out.flush();
 
+			
+			System.out.println("333333333333333333333333333333333333333333333333333333333333333333");
 			// 定义BufferedReader输入流来读取URL的响应
 			in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 			String line = null;
@@ -82,7 +88,7 @@ public class InvokeApi {
 				result += line;
 			}
 
-			System.out.println("result:" + result);
+			System.out.println("44444result:" + result);
 			return result;
 		} catch (Exception e) {
 			System.out.println("发送 POST 请求出现异常！" + e);
@@ -110,7 +116,8 @@ public class InvokeApi {
 				return null;
 			}
 
-			String r = post("/xt/app/getContactInfoById.app", userId);
+			String r = post("", userId);
+			System.out.println("result:" + r);
 
 			JSONObject jsonObj = JSONObject.fromObject(r);
 			int code = jsonObj.getInt("r");

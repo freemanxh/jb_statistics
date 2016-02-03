@@ -8,9 +8,11 @@ import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 import com.jb.statistics.cron.logstatistics.LogStatistic;
 
+@Service("logStatisticJob")
 public class LogStatisticJob {
 	public static Logger logger = Logger.getLogger(LogStatisticJob.class);
 
@@ -22,7 +24,11 @@ public class LogStatisticJob {
 		c.add(Calendar.DAY_OF_YEAR, -1);
 		this.logStatistic.statis(c);
 
-		System.out.println("run run ...."+c.getTime().toString());
+		System.out.println("run run ...." + c.getTime().toString());
+	}
+
+	public void cal(String date) {
+		this.logStatistic.statis(date);
 	}
 
 	// @Override
@@ -96,7 +102,22 @@ public class LogStatisticJob {
 
 	public static void main(String[] args) {
 
-		ApplicationContext ac = new ClassPathXmlApplicationContext(new String[] { "applicationContextDao.xml", "applicationContextCron.xml", "spring-quartz.xml" });
+		ApplicationContext ac = null;
+		if (args.length == 0) {
+			ac = new ClassPathXmlApplicationContext(new String[] { "applicationContextDao.xml", "applicationContextCron.xml", "spring-quartz.xml" });
+		} else {
+			String date = args[0];
+			ac = new ClassPathXmlApplicationContext(new String[] { "applicationContextDao.xml", "applicationContextCron.xml" });
+
+			LogStatisticJob logStatisticJob = (LogStatisticJob) ac.getBean("logStatisticJob");
+
+			// String[] strs = new String[] { "2016-01-28", "2016-01-29",
+			// "2016-01-30", "2016-01-31", "2016-02-01", "2016-02-02" };
+			// for (String s : strs) {
+			logStatisticJob.cal(date);
+			// }
+
+		}
 
 		// LogStatistic logStatistic = (LogStatistic)
 		// ac.getBean("logStatistic");
@@ -106,4 +127,5 @@ public class LogStatisticJob {
 		// System.out.println(ac);
 
 	}
+
 }

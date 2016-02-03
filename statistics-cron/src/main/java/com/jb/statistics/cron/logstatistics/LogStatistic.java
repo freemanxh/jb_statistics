@@ -29,7 +29,7 @@ public class LogStatistic {
 
 	public static void main(String[] args) {
 
-		ApplicationContext ac = new ClassPathXmlApplicationContext(new String[] { "applicationContextDao.xml", "applicationContextCron.xml"});
+		ApplicationContext ac = new ClassPathXmlApplicationContext(new String[] { "applicationContextDao.xml", "applicationContextCron.xml" });
 
 		LogStatistic logStatistic = (LogStatistic) ac.getBean("logStatistic");
 
