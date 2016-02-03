@@ -218,18 +218,6 @@ var App = function() {
         }
     };
 
-    // Handles counterup plugin wrapper
-    var handleCounterup = function() {
-        if (!$().counterUp) {
-            return;
-        }
-
-        $("[data-counter='counterup']").counterUp({
-            delay: 10,
-            time: 1000
-        });
-    };
-
     // Fix input placeholder issue for IE8 and IE9
     var handleFixInputPlaceholderForIE = function() {
         //fix html5 placeholder attribute for ie7 & ie8
@@ -311,9 +299,6 @@ var App = function() {
             //UI Component handlers
 
             handlePortletTools(); // handles portlet action bar functionality(refresh, configure, toggle, remove)
-
-            handleCounterup(); // handle counterup instances
-
 
             //Handle group element heights
             this.addResizeHandler(handleHeight); // handle auto calculating height on window resize
