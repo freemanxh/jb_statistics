@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jb.statistics.webapp.controller.forms.CountForm;
-import com.jb.statistics.webapp.service.CountClickFunctionsService;
-import com.jb.statistics.webapp.service.CountClickService;
-import com.jb.statistics.webapp.service.CountNewUserService;
 import com.jb.statistics.webapp.service.ProjectService;
 import com.jb.statistics.webapp.view.ClickFunctionsView;
 import com.jb.statistics.webapp.view.ClickView;
@@ -139,5 +136,22 @@ public class CountUserLogJsonController extends CountUserLogController {
 		return new JsonModelAndView(nur);
 
 	}
+
+//	public static String cutTailZero(String s) {
+//		if (s != null && s.contains(".")) {
+//			s = s.trim();
+//			if (!s.endsWith(".0")) {
+//				while (s.endsWith("0") && !s.endsWith(".0")) {
+//					s = s.substring(0, s.length() - 1);
+//				}
+//				return s;
+//			}
+//		}
+//		return s;
+//	}
+//
+//	public static void main(String[] args) {
+//		System.out.println(cutTailZero("8.00"));
+//	}
 
 }

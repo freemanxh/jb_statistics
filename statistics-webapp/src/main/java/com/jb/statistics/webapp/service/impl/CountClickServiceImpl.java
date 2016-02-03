@@ -40,18 +40,19 @@ public class CountClickServiceImpl extends BaseServiceImpl implements CountClick
 		for (ClickBean cb : list) {
 			if (cb != null) {
 				String ts = cb.getTimeSeg();
+				ts = ts.length() == 1 ? "0" + ts : ts;
 				cb.setTimeSeg(ts + ":00-" + ts + ":59");
 			}
 		}
-		
+
 		List<ClickEntity> ll = new ArrayList<ClickEntity>();
-		Set<ClickBean> sortSet=new TreeSet<ClickBean>(list);
-		for (ClickBean cb:sortSet){
+		Set<ClickBean> sortSet = new TreeSet<ClickBean>(list);
+		for (ClickBean cb : sortSet) {
 			ClickEntity ce = new ClickEntity();
 			BeanUtils.copyProperties(cb, ce);
 			ll.add(ce);
 		}
-		
+
 		ClickView cv = new ClickView();
 		cv.setList(ll);
 		return cv;
